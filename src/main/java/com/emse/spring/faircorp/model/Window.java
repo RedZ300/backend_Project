@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class Window {
 
     @Id
-    @GeneratedValue
     private long id;
 
     @Column(nullable = false)
@@ -24,7 +23,12 @@ public class Window {
     public Window() {
 
     }
-
+    public Window(Long id,String name, WindowStatus status, Room room) {
+        this.window_status = status;
+        this.id = id;
+        this.name = name;
+        this.room = room;
+    }
     public Window(String name, WindowStatus status, Room room) {
         this.window_status = status;
         this.name = name;

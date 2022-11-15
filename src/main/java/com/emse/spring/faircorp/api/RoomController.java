@@ -11,6 +11,7 @@ import com.emse.spring.faircorp.model.*;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,7 +59,8 @@ public class RoomController {
         Building building = buildingDao.getById(dto.getBuildingId());
         Room room = null;
         if(dto.getId() == null){
-            room = roomDao.save(new Room(dto.getName(),dto.getFloor(), dto.getCurrent_temperature(), dto.getTarget_temperature(),building));
+            Long id = roomDao.findAll().stream().max(Comparator.comparing(room1 -> room1.getId())).get().getId();
+            room = roomDao.save(new Room(id+1,dto.getName(),dto.getFloor(), dto.getCurrent_temperature(), dto.getTarget_temperature(),building));
         } else {
             room = roomDao.getReferenceById(dto.getId());
             room.setFloor(dto.getFloor());

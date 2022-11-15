@@ -36,6 +36,14 @@ public class Room {
 
     }
 
+    public Room(Long id,String name, Integer floor, Double current_temperature, Double target_temperature, Building building){
+        this.id = id;
+        this.name = name;
+        this.floor = floor;
+        this.current_temperature = current_temperature;
+        this.target_temperature = target_temperature;
+        this.building = building;
+    }
     public Room(String name, Integer floor, Double current_temperature, Double target_temperature, Building building){
         this.name = name;
         this.floor = floor;

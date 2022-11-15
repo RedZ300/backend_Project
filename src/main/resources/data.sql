@@ -6,7 +6,7 @@ INSERT INTO ROOM(id, name, floor, current_temperature, target_temperature, build
 INSERT INTO ROOM(id, name, floor, current_temperature, target_temperature, building_id) VALUES(2, 'Room2', 3, 31.5, 25.5, 1);
 INSERT INTO ROOM(id, name, floor, current_temperature, target_temperature, building_id) VALUES(3, 'Room3', 1, 31.5, 15.5, 3);
 INSERT INTO ROOM(id, name, floor, current_temperature, target_temperature,building_id) VALUES(4, 'Room4', 1, 26.8, 15.5, 2);
-INSERT INTO ROOM(id, name, floor, current_temperature, target_temperature, building_id) VALUES(5, 'Room5', 2, 31.5, 25.5, 1);
+INSERT INTO ROOM(id, name, floor, current_temperature, target_temperature, building_id) VALUES(5, 'Room5', 1, 31.5, 25.5, 1);
 INSERT INTO ROOM(id, name, floor, current_temperature, target_temperature, building_id) VALUES(6, 'Room6', 2, 42.5, 37.5, 2);
 
 INSERT INTO HEATER(id, heater_status, name, power, room_id) VALUES(1, 'ON', 'Heater1', 2000, 1);

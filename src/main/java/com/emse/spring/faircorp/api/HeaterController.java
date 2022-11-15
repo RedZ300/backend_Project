@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,8 @@ public class HeaterController {
         Room room = roomDao.getById(dto.getRoomid());
         Heater heater = null;
         if(dto.getId() == null){
-            heater = heaterDao.save(new Heater(dto.getName(), dto.getHeater_status(), room));
+            Long id = heaterDao.findAll().stream().max(Comparator.comparing(heater1 -> heater1.getId())).get().getId();
+            heater = heaterDao.save(new Heater(id+1,dto.getName(), dto.getHeater_status(), room));
         } else {
             heater = heaterDao.getReferenceById(dto.getId());
             heater.setHeater_status(dto.getHeater_status());

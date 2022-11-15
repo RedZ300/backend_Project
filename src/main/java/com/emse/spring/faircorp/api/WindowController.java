@@ -8,12 +8,13 @@ import com.emse.spring.faircorp.model.Window;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/window")
+@RequestMapping("/api/windows")
 @Transactional
 public class WindowController {
 
@@ -41,7 +42,8 @@ public class WindowController {
         Room room = roomDao.getById(dto.getRoomId());
         Window window = null;
         if(dto.getId() == null){
-            window = windowDao.save(new Window(dto.getName(), dto.getWindow_status(), room));
+            Long id = windowDao.findAll().stream().max(Comparator.comparing(window1 -> window1.getId())).get().getId();
+            window = windowDao.save(new Window(id+1,dto.getName(), dto.getWindow_status(), room));
         } else {
             window = windowDao.getReferenceById(dto.getId());
             window.setWindowStatus(dto.getWindow_status());

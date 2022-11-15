@@ -8,7 +8,6 @@ import java.util.List;
 public class Building {
 
     @Id
-    @GeneratedValue
     private long id;
 
     @Column(nullable = false)
@@ -26,6 +25,13 @@ public class Building {
 
     public Building() {
 
+    }
+
+    public Building(Long id,Integer FloorCount, String name, String adress) {
+        this.id = id;
+        this.FloorCount = FloorCount;
+        this.name = name;
+        this.adress = adress;
     }
 
     public Building(Integer FloorCount, String name, String adress) {

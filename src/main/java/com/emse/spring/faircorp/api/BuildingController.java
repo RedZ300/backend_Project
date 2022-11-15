@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,7 +73,8 @@ public class BuildingController {
 
         Building building = null;
         if(dto.getId() == null){
-            building = buildingDao.save(new Building(dto.getFloorCount(), dto.getName(), dto.getAdresse()));
+            Long id = buildingDao.findAll().stream().max(Comparator.comparing(building1 -> building1.getId())).get().getId();
+            building = buildingDao.save(new Building(id+1,dto.getFloorCount(), dto.getName(), dto.getAdresse()));
         } else {
             building = buildingDao.getReferenceById(dto.getId());
             building.setAdress(dto.getAdresse());
@@ -96,6 +98,7 @@ public class BuildingController {
                 heaterDao.deleteByRoom(roomid);
                 roomDao.deleteById(roomid);
             }
+            buildingDao.deleteById(id);
         }
 
     }

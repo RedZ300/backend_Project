@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class Heater {
 
     @Id
-    @GeneratedValue
     private long id;
 
     @Column(nullable = false)
@@ -27,6 +26,12 @@ public class Heater {
 
     }
 
+    public Heater(Long id,String name, HeaterStatus heaterStatus, Room room){
+        this.id = id;
+        this.heater_status = heaterStatus;
+        this.name = name;
+        this.room = room;
+    }
     public Heater(String name, HeaterStatus heaterStatus, Room room){
         this.heater_status = heaterStatus;
         this.name = name;

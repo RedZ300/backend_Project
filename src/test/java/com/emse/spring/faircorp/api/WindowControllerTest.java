@@ -47,7 +47,7 @@ class WindowControllerTest {
                 createWindow("window 2")
         ));
 
-        mockMvc.perform(get("/api/window")
+        mockMvc.perform(get("/api/windows")
                         .accept(APPLICATION_JSON))
                 // check the HTTP response
                 .andExpect(status().isOk())
@@ -60,7 +60,7 @@ class WindowControllerTest {
     void shouldLoadAWindowAndReturnNullIfNotFound() throws Exception {
         given(windowDao.findById(999L)).willReturn(Optional.empty());
 
-        mockMvc.perform(get("/api/window/999").accept(APPLICATION_JSON))
+        mockMvc.perform(get("/api/windows/999").accept(APPLICATION_JSON))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 // the content can be tested with Json path
@@ -72,7 +72,7 @@ class WindowControllerTest {
     void shouldLoadAWindow() throws Exception {
         given(windowDao.findById(999L)).willReturn(Optional.of(createWindow("window 1")));
 
-        mockMvc.perform(get("/api/window/999").accept(APPLICATION_JSON))
+        mockMvc.perform(get("/api/windows/999").accept(APPLICATION_JSON))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 // the content can be tested with Json path
@@ -90,7 +90,7 @@ class WindowControllerTest {
         given(roomDao.getReferenceById(anyLong())).willReturn(expectedWindow.getRoom());
         given(windowDao.getReferenceById(anyLong())).willReturn(expectedWindow);
 
-        mockMvc.perform(put("/api/window").content(json).contentType(APPLICATION_JSON_VALUE).with(csrf()))
+        mockMvc.perform(put("/api/windows").content(json).contentType(APPLICATION_JSON_VALUE).with(csrf()))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("window 1"))
@@ -107,7 +107,7 @@ class WindowControllerTest {
         given(roomDao.getReferenceById(anyLong())).willReturn(expectedWindow.getRoom());
         given(windowDao.getReferenceById(anyLong())).willReturn(expectedWindow);
 
-        mockMvc.perform(put("/api/window").content(json).contentType(APPLICATION_JSON_VALUE).with(csrf()))
+        mockMvc.perform(put("/api/windows").content(json).contentType(APPLICATION_JSON_VALUE).with(csrf()))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("window 1"))
@@ -123,7 +123,7 @@ class WindowControllerTest {
         given(roomDao.getReferenceById(anyLong())).willReturn(expectedWindow.getRoom());
         given(windowDao.getReferenceById(anyLong())).willReturn(expectedWindow);
 
-        mockMvc.perform(post("/api/window").content(json).contentType(APPLICATION_JSON_VALUE).with(csrf()))
+        mockMvc.perform(post("/api/windows").content(json).contentType(APPLICATION_JSON_VALUE).with(csrf()))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("window 1"))
@@ -133,7 +133,7 @@ class WindowControllerTest {
     @Test
     @WithMockUser(username = "Admin", password = "adminpwd", roles = "ADMIN")
     void shouldDeleteWindow() throws Exception {
-        mockMvc.perform(delete("/api/window/999").with(csrf()))
+        mockMvc.perform(delete("/api/windows/999").with(csrf()))
                 .andExpect(status().isOk());
     }
 
